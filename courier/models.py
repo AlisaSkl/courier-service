@@ -6,10 +6,11 @@ from courier_service import settings
 
 class District(models.Model):
     name = models.CharField(max_length=255)
-    courier = models.ManyToManyField(
+    area = models.FloatField(blank=True)
+    couriers = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
         blank=True,
-        related_name="couriers"
+        related_name="districts"
     )
 
     def __str__(self):
@@ -18,6 +19,8 @@ class District(models.Model):
 
 class Restaurant(models.Model):
     name = models.CharField(max_length=255)
+    cuisine = models.CharField(max_length=255, blank=True)
+    address = models.TextField()
     district = models.ForeignKey(
         District,
         on_delete=models.CASCADE,
@@ -33,6 +36,7 @@ class Restaurant(models.Model):
 
 class Courier(AbstractUser):
     driving_license = models.CharField(max_length=9),
+    rating = models.FloatField(blank=True)
 
     class Meta:
         ordering = ("username", )
