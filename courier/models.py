@@ -6,7 +6,6 @@ from courier_service import settings
 
 class District(models.Model):
     name = models.CharField(max_length=255)
-    area = models.FloatField(blank=True)
     couriers = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
         blank=True,
@@ -35,8 +34,8 @@ class Restaurant(models.Model):
 
 
 class Courier(AbstractUser):
-    driving_license = models.CharField(max_length=9),
-    rating = models.FloatField(blank=True)
+    driving_license = models.CharField(max_length=9, default="Unknown")
+    rating = models.FloatField(blank=True, null=True)
 
     class Meta:
         ordering = ("username", )
