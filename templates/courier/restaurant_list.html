@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Restaurant List</h2>
+  <table class="table">
+    <tr>
+      <th>Name</th>
+      <th>Cuisine</th>
+      <th>Address</th>
+    </tr>
+    {% for restaurant in restaurant_list %}
+        <tr>
+          <td>{{ restaurant.name }}</td>
+          <td>{{ restaurant.cuisine }}</td>
+          <td>{{ restaurant.address }}</td>
+        </tr>
+    {% empty %}
+        <p>No restaurants</p>
+      {% endfor %}
+  </table>
+{% endblock %}

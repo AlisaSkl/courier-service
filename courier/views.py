@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from django.views import generic
 
-# Create your views here.
+from courier.models import Restaurant
+
+class RestaurantListView(generic.ListView):
+    model = Restaurant
+    queryset = Restaurant.objects.order_by("name")
